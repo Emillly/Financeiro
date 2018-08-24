@@ -1,55 +1,77 @@
 package br.edu.ifpb.esperanca.daw2.financeiro;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
+import java.util.Collection;
 
-import javax.faces.bean.ApplicationScoped;
-import javax.faces.bean.ManagedBean;
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
-@ManagedBean
-@ApplicationScoped
+@ViewScoped
+@Named
+public class UsuarioBean implements Serializable{
+	
+	@Inject
+	private UserService service;
 
-public class UsuarioBean {
+	protected Usuario entidade;
 
-	private List<Usuario> usuarios = new ArrayList<Usuario>();
-
-	private Usuario usuario;
+	protected Collection<Usuario> entidades;
 
 	public UsuarioBean() {
-		usuario = new Usuario();
+	}
+	
+	@PostConstruct
+	public void init() {
+		entidade = newEntidade();
+		entidades = getService().getAll();
 	}
 
-	public List<Usuario> getUsuarios() {
-		return usuarios;
+	public void remove(Usuario entidade) {
+		getService().remove(entidade);
+		limpar();
 	}
 
-	public void setUsuarios(List<Usuario> usuarios) {
-		this.usuarios = usuarios;
+	public Usuario getEntidade() {
+		return entidade;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public void setEntidade(Usuario entidade) {
+		this.entidade = entidade;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public Collection<Usuario> getEntidades() {
+		return entidades;
 	}
 
-	public void addUsuario() {
-		usuario.setResultado(usuario.getSalariofixo()-usuario.getDespesafixa());
-		usuarios.add(usuario);
-		usuario = new Usuario();
-
+	public void setEntidades(Collection<Usuario> entidades) {
+		this.entidades = entidades;
 	}
 
-	public void removeUsuario(int id_cpf) {
-		for (Usuario usuario : usuarios) {
-			if (usuario.getId_cpf() == id_cpf) {
-				usuarios.remove(usuario);
-				return;
-			}
-		}
+	public void save() {
+		getService().save(entidade);
+		limpar();
 	}
+
+	public void editar(Long id) {
+		this.getEntidade().setId(id);
+		save();
+	}
+
+	public void limpar() {
+		entidades = getService().getAll();
+		entidade = newEntidade();
+	}
+
+	protected Usuario newEntidade() {
+		return new Usuario();
+	}
+
+	public UserService getService() {
+		return service;
+	}
+
 
 
 	

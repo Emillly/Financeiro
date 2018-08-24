@@ -17,30 +17,30 @@
 			</f:facet>
 
 			<h:outputLabel value="Nome: " for="nome" />
-			<p:inputText id="nome" value="#{usuarioBean.usuario.nome}"
+			<p:inputText id="nome" value="#{usuarioBean.entidade.nome}"
 				label="Nome" style="width:350px" />
 
 			<h:outputLabel value="Idade: " for="idade" />
-			<p:inputText id="idade" value="#{usuarioBean.usuario.idade}"
+			<p:inputText id="idade" value="#{usuarioBean.entidade.idade}"
 				label="Idade" style="width:350px" />
 
 			<h:outputLabel value="CPF: " for="id_cpf" />
-			<p:inputText id="id_cpf" value="#{usuarioBean.usuario.id_cpf}"
+			<p:inputText id="id_cpf" value="#{usuarioBean.entidade.id_cpf}"
 				label="CPF" style="width:350px" />
 
 			<h:outputLabel value="Endereco: " for="endereco" />
-			<p:inputText id="endereco" value="#{usuarioBean.usuario.endereco}"
+			<p:inputText id="endereco" value="#{usuarioBean.entidade.endereco}"
 				label="Endereco" style="width:350px" />
 
 
 			<h:outputLabel value="Despesas Fixas:" for="despesafixa" />
 			<p:inputText id="despesafixa"
-				value="#{usuarioBean.usuario.despesafixa}" label="despesafixa"
+				value="#{usuarioBean.entidade.despesafixa}" label="despesafixa"
 				style="width:350px" />
 
 			<h:outputLabel value="Salario Fixo:" for="salariofixo" />
 			<p:inputText id="salariofixo"
-				value="#{usuarioBean.usuario.salariofixo}" label="salariofixo"
+				value="#{usuarioBean.entidade.salariofixo}" label="salariofixo"
 				style="width:350px" />
 
 
@@ -52,8 +52,8 @@
 
 
 		</h:panelGrid>
-		<p:dataTable id="dataTableUsuarios" var="usu"
-			value="#{usuarioBean.usuarios}" border="1">
+		<p:dataTable id="dataTableUsuarios" border="1" var="usu"
+			value="#{usuarioBean.usuarios}" >
 			<p:column>
 				<f:facet name="header">Usuarios Cadastrados</f:facet>
 				<h:outputText value="#{usu.nome}"></h:outputText>

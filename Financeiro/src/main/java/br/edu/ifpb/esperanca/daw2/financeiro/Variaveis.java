@@ -1,8 +1,20 @@
 package br.edu.ifpb.esperanca.daw2.financeiro;
 
-public class Variaveis {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+
+@Entity
+public class Variaveis implements Identificavel {
 	
-	private int idVariavel;
+	@Id
+	@GeneratedValue(generator="var_seq", strategy=GenerationType.SEQUENCE)
+	@SequenceGenerator(name="var_seq")
+	private Long idVariavel;
+	
+	
 	private int rendaVariavel;
 	private int despesavariavel;
 	
@@ -18,12 +30,17 @@ public class Variaveis {
 	public void setDesdesavariavel(int desdesavariavel) {
 		this.despesavariavel = desdesavariavel;
 	}
-	public int getIdVariavel() {
+	
+	
+	@Override
+	public Long getId() {
 		return idVariavel;
 	}
-	public void setIdVariavel(int idVariavel) {
-		this.idVariavel = idVariavel;
-	}
-	
+	@Override
+	public void setId(Long id) {
+		this.idVariavel = id;
+		
 
+
+}
 }

@@ -10,7 +10,9 @@
    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
    <!-- entidade mapeada -->
-   <class>src.main.java.br.edu.ifpb.esperanca.daw2.financerio.Usuario</class>
+   <class>br.edu.ifpb.esperanca.daw2.financeiro.Usuario</class>
+   <class>br.edu.ifpb.esperanca.daw2.financeiro.Variaveis</class>
+   
 
    <properties>
     <!-- dados da conexao -->

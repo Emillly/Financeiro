@@ -2,15 +2,18 @@ package br.edu.ifpb.esperanca.daw2.financeiro;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-public class Usuario {
+public class Usuario implements Identificavel {
 
 	@Id
-	@GeneratedValue
-	private int id_cpf;
+	@GeneratedValue(generator="usuario_seq", strategy=GenerationType.SEQUENCE)
+	@SequenceGenerator(name="usuario_seq")
+	private Long id_cpf;
 
 	private String nome;
 	private int idade;
@@ -18,6 +21,11 @@ public class Usuario {
 	private float salariofixo;
 	private float resultado;
 	private String endereco;
+	private String username; 
+	private String password;
+	private String grupo;
+		
+	
 
 	public float getResultado() {
 		return resultado;
@@ -51,14 +59,6 @@ public class Usuario {
 		this.idade = idade;
 	}
 
-	public int getId_cpf() {
-		return id_cpf;
-	}
-
-	public void setId_cpf(int id_cpf) {
-		this.id_cpf = id_cpf;
-	}
-
 	public String getEndereco() {
 		return endereco;
 	}
@@ -73,6 +73,41 @@ public class Usuario {
 
 	public void setDespesafixa(float despesafixa) {
 		this.despesafixa = despesafixa;
+	}
+	
+	@Override
+	public Long getId() {
+		return id_cpf;
+	}
+	
+	@Override
+	public void setId(Long id) {
+		this.id_cpf = id;
+		
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getGrupo() {
+		return grupo;
+	}
+
+	public void setGrupo(String grupo) {
+		this.grupo = grupo;
 	}
 
 }

@@ -9,9 +9,22 @@
 
 <h:body>
 
+<p:messages />
+
+	<h:form id="formMenu">
+		<p:menubar>
+			<f:facet name="options">
+						Olá, #{usuarioBean.userLogin}
+						<p:commandButton id="menuItemLogout" value="Logout"
+					icon="fa fa-fw fa-sign-out" action="#{usuarioBean.efetuarLogout}"
+					ajax="false" />
+			</f:facet>
+		</p:menubar>
+	</h:form>
+
 
 	<h:form id="form">
-		<h:panelGrid columns="2">
+		<h:panelGrid columns="2" rendered="#{usuarioBean.isUserInRole('ADMIN')}">
 			<f:facet name="caption">
 				<h:outputText value="CADASTRO DE USUARIO" />
 			</f:facet>
@@ -42,12 +55,31 @@
 			<p:inputText id="salariofixo"
 				value="#{usuarioBean.entidade.salariofixo}" label="salariofixo"
 				style="width:350px" />
+				
+			<p:outputLabel value="Username: " for="username" />
+			<p:inputText id="usernameField"
+				value="#{usuarioBean.entidade.username}" label="Username"
+				style="width:350px" />
+
+			<p:outputLabel value="Password: " for="password" />
+			<p:password id="passwordField"
+				value="#{usuarioBean.entidade.password}" label="Password"
+				style="width:350px" />
+
+			<p:outputLabel value="Grupo: " for="grupo" />
+			<p:selectOneMenu id="grupoField" value="#{usuarioBean.entidade.grupo}"
+				label="Grupo" style="width:350px">
+				<f:selectItem itemLabel="OUTROS" itemValue="OUTROS" />
+				<f:selectItem itemLabel="ADMIN" itemValue="ADMIN" />
+			</p:selectOneMenu>
 
 
-
-
-			<p:commandButton id="btnAddBotao" value="Adicionar"
-				action="#{usuarioBean.addUsuario()}" ajax = "false" />
+	
+			<p:commandButton id="btnNovo" value="Novo"
+				action="#{usuarioBean.save()}" ajax="false"  />
+			<p:commandButton id="btnLimpar" value="Limpar"
+				action="#{usuarioBean.limpar()}" ajax="false" />
+		</p:panelGrid>
 
 
 
@@ -63,12 +95,14 @@
 				<h:outputText value="#{usu.resultado}"></h:outputText>
 			</p:column>
 
-			<p:column>
-			<f:facet name="header">Remover</f:facet>
-			<p:commandButton id="btnREMBotao" value="Remover"
-				action="#{usuarioBean.removeUsuario(usu.id_cpf)}" ajax="false"
-				update="dataTableUsuarios"> </p:commandButton>
+			<p:column rendered="#{usuarioBean.isUserInRole('ADMIN')}">
+				<f:facet name="header">Opções</f:facet>
+				<p:commandButton value="Remover" ajax="false"
+					action="#{usuarioBean.remove(entidade)}"></p:commandButton>
+				<p:commandButton value="Editar" ajax="false"
+					action="#{usuarioBean.editar(entidade.id)}"></p:commandButton>
 			</p:column>
+			
 		</p:dataTable>
 	
 		

@@ -6,7 +6,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import br.edu.ifpb.esperanca.daw2.financeiro.UsuarioDAO;
-import br.edu.ifpb.esperanca.daw2.financeiro.Usuario;
 import br.edu.ifpb.esperanca.daw2.financeiro.TransacionalCdi;
 
 public class UserService implements Serializable, Service<Usuario>  {
